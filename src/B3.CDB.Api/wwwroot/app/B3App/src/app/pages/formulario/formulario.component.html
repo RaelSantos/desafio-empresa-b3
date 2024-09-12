@@ -1,0 +1,36 @@
+<div class="container main-container">
+  <form (ngSubmit)="calcular()" [formGroup]="form">
+    <h4>Calculo do CDB</h4>
+    <hr>
+    <div class="form-group">
+      <label class="control-label">Valor</label>
+      <div>
+          <input currencyMask [options]="{ prefix:'R$', thousands:'.', decimal:',', align:'left', allowNegative:false }"
+          formControlName="valor" type="text" class="form-control" id="valor" placeholder="Valor (requerido)" />
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Meses</label>
+    <div>
+        <input formControlName="meses" type="number" min="1" max="100" class="form-control" id="meses" placeholder="Meses (requerido)" />
+    </div>
+</div>
+
+<div class="form-group p-1">
+  Valor Bruto: {{ response.valorBruto | currency:'BRL':'symbol':'1.2-2':'pt' }}
+</div>
+
+<div class="form-group p-1">
+  Valor Liquido : {{ response.valorLiquido | currency:'BRL':'symbol':'1.2-2':'pt' }}
+</div>
+
+<span *ngIf="erro" class="text-danger"> Ops, tivemos um erro inesperado, desculpe! :( </span>
+
+<div class="form-group p-2">
+  <input type="submit" value="Calcular" [disabled]="!form.valid" class="btn btn-primary">&nbsp;
+</div>
+</form>
+</div>
+
+
